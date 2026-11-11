@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the manuscript and the archived release."
+title: "microbiome-clock-transportability"
+abstract: >-
+  Analysis code for a measurement-validity study of gut microbiome ageing clocks
+  in adult chronic liver disease, based on 14,898 public stool metagenomes
+  (74 studies, curatedMetagenomicData 3.14).
+version: "1.0.0"
+date-released: "2026-11-10"
+license: MIT
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.<XXXXXXX>"
+    description: "Archived release (fill in after the Zenodo deposit)"
+references:
+  - type: generic
+    title: "curatedMetagenomicData"
+    doi: "10.18129/B9.bioc.curatedMetagenomicData"
+authors:
+  - family-names: "<Family>"
+    given-names: "<Given>"
+    affiliation: "<Institution>"

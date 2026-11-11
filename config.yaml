@@ -1,0 +1,62 @@
+# 慢性肝病肠道微生态研究 — 项目配置（数据源锁定版）
+# 锁定日期: 2026-11-09
+
+project:
+  name: liver-mb
+  modules: [M1_clock, M2_decoupling, M3_snv]
+
+# ---------- M1 时钟训练集（已锁定，全部公开） ----------
+m1_training:
+  # 主来源：da Silva et al., Cell Host & Microbe 2026, 11,115 全球宏基因组荟萃分析
+  source_paper:
+    title: "Meta-analysis of the uncultured gut microbiome across 11,115 global metagenomes reveals a candidate signature of health"
+    doi: "10.1016/j.chom.2026.01.013"
+    license: "CC BY 4.0"
+    lead_contact: "Alexandre Almeida <aa2369@cam.ac.uk>"
+  # 物种丰度矩阵（UHGG v1.0 read counts, 11,115 样本, 113 MB）
+  abundance:
+    figshare_doi: "10.6084/m9.figshare.29963597.v1"
+    file: "uhgg_abundance_filtered.csv"
+    size_bytes: 112966801
+    md5: "c3517e8a7fe3bd3d7112bcea845c8aff"
+    download_url: "https://ndownloader.figshare.com/files/57348290"
+  # 样本级 metadata（健康状态/年龄组/国家）= 论文 Table S1（CC BY，ScienceDirect 补充材料）
+  metadata:
+    source: "Table S1 of the source paper (ScienceDirect supplementary)"
+    local_path: "data/metadata/table_s1.csv"
+  # 样本筛选目标：healthy + 有年龄信息 -> 预期约 4551 例（与 Metabolism 2027 的训练集同源）
+  target_cohort:
+    n_expected: 4551
+    age_range: "0-90"
+  # 功能队列（MetaCyc 通路）：curatedMetagenomicData
+  functional_cohort:
+    tool: "curatedMetagenomicData (R/Bioconductor)"
+    n_expected: 843
+  reference_db:
+    uhgg: "UHGG catalog v1.0 (ENA ERP116715)"
+    human_ref: "GRCh38, GenBank GCA_000001405.15"
+  reference_code:
+    github: "https://github.com/microfundiv-lab/SecretBugs"
+    ml_pipeline: "https://github.com/alexmsalmeida/ml-microbiome"
+    quant_pipeline: "https://github.com/alexmsalmeida/metamap"
+
+# ---------- M2 异步解耦（受控访问，第 1 周提交申请） ----------
+m2_ega:
+  study: "EGAS00001004600"
+  dataset: "EGAD00001006364"
+  dac: "EGAC00001001691 (NAFLD Research Center, UCSD)"
+  publication: "Oh et al., Cell Metabolism 2020;32:878-888 (UCSD NAFLD cohort, PI Rohit Loomba)"
+  n_samples: 162
+  size_gb: 48.3
+  platform: "Illumina HiSeq 4000 shotgun + untargeted metabolomics"
+  files: 324
+  url: "https://ega-archive.org/datasets/EGAD00001006364"
+  application_kit: "EGA数据访问申请材料包.docx"
+
+# ---------- M3 SNV-PheWAS 队列（公开 shotgun，来自队列盘点.xlsx） ----------
+m3_cohorts:
+  - {id: PRJEB6337,   study: "Qin 2014 Nature",          n: 237, pheno: "cirrhosis/control"}
+  - {id: PRJNA373901, study: "Loomba 2017 (advanced fibrosis)", n: 86, pheno: "NAFLD fibrosis stage"}
+  - {id: PRJEB55534,  study: "EPoS European NAFLD",      n: 173, pheno: "20 ctrl / 22 NAFLD / 131 NASH"}
+  - {id: Bajaj_HE,    study: "Bajaj cirrhosis+HE",        n: 203, pheno: "cirrhosis / hepatic encephalopathy"}
+  # 注：16S 队列（Ren 2019 HCC 等）不进 M3
