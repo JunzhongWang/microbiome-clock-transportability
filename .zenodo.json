@@ -1,0 +1,13 @@
+{
+  "title": "Analysis code for age-stratified failure of gut microbiome ageing clocks and a transportable alternative for chronic liver disease",
+  "creators": [
+    {
+      "name": "Please fill in your name",
+      "affiliation": "Please fill in your affiliation"
+    }
+  ],
+  "description": "Python/R/shell code for the re-analysis of 14,898 public gut metagenomes from 74 studies: age-stratified clock evaluation, six-implementation validation, leave-one-study-out projection with a calibration gate, and healthy-manifold deviation analysis.",
+  "license": "MIT",
+  "keywords": ["microbiome", "ageing clock", "chronic liver disease", "metagenomics"],
+  "access_right": "open"
+}
